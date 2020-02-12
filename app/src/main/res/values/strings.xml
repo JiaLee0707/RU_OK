@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">calendar2</string>
+    <string name="app_name">RU_OK</string>
+
+    <string name="login">로그인</string>
+    <string name="email">이메일</string>
+    <string name="password">비밀번호</string>
+    <string name="find">이메일/비밀번호 찾기</string>
+    <string name="join">회원가입</string>
+
+    <string name="name">이름</string>
+    <string name="name_Input">이름 입력</string>
+    <string name="email_Input">이메일 입력</string>
+    <string name="password_Pattern">영문,숫자,특수문자 조합으로 4~16자리 입력</string>
+    <string name="password_check">비밀번호 확인</string>
+    <string name="password_Input">비밀번호 입력</string>
 </resources>
