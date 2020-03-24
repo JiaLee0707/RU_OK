@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import kr.hs.emirim.s2018s37.ru_ok.R;
+
 public class WriteDairy extends AppCompatActivity {
 
     @Override

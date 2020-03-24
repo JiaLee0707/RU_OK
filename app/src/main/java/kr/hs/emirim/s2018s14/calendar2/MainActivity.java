@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.widget.CalendarView;
 import android.widget.Toast;
 
+import kr.hs.emirim.s2018s37.ru_ok.R;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
