@@ -20,6 +20,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+
+import kr.hs.emirim.s2018s37.ru_ok.UserModel.UserModel;
 
 public class JoinActivity extends AppCompatActivity {
 
@@ -82,6 +85,13 @@ public class JoinActivity extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
                             // 회원가입 성공
+                            UserModel userModel = new UserModel();
+                            userModel.userName = name;
+
+                            String uid = task.getResult().getUser().getUid();
+                            FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel);
+
+
                             Toast.makeText(JoinActivity.this, "회원가입 완료", Toast.LENGTH_SHORT).show();
                             finish();
                         } else {
