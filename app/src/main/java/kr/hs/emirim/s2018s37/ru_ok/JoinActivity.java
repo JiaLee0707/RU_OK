@@ -68,7 +68,7 @@ public class JoinActivity extends AppCompatActivity {
         password = editTextPassword.getText().toString();
         passwordCheck = editTextPasswordCheck.getText().toString();
 
-        if (isValidEmail() && isValidPasswd()) {
+        if (isValidName() && isValidEmail() && isValidPasswd()) {
             JoinUser(email, password);
         }
     }
@@ -128,4 +128,11 @@ public class JoinActivity extends AppCompatActivity {
         }
     }
 
+    private boolean isValidName() {
+        if(name == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

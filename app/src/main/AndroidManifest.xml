@@ -11,7 +11,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
 
-        <activity android:name=".LoginActivity">
+        <activity android:name=".LoginActivity" />
+
+        <activity android:name=".LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,6 +24,8 @@
         <activity android:name=".JoinActivity" />
 
         <activity android:name=".WriteDairy" />
+
+        <activity android:name=".ChattingActivity" />
     </application>
 
 </manifest>
