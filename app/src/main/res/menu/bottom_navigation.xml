@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_calendar"
+        android:icon="@drawable/calendar"
+        android:title="캘린더"/>
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/search"
+        android:title="검색"/>
+    <item
+        android:id="@+id/action_chatting"
+        android:icon="@drawable/chatting"
+        android:title="채팅"/>
+    <item
+        android:id="@+id/action_people"
+        android:icon="@drawable/person"
+        android:title="프로필"/>
+</menu>
