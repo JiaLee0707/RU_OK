@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4F7D9"
-    tools:context=".MainActivity">
+    android:orientation="vertical">
 
-    <CalendarView
-        android:id="@+id/calendar"
-        android:layout_width="395dp"
-        android:layout_height="354dp"
-        android:background="#F4F7D9"
-        android:dateTextAppearance="@style/CalenderViewDateCustomText"
-        android:descendantFocusability="blocksDescendants"
-        android:drawingCacheQuality="auto"
-        android:selectedWeekBackgroundColor="#FFC107"
-        android:theme="@style/CalenderViewCustom"
-        android:weekDayTextAppearance="@style/CalenderViewWeekCustomText"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <!--android:dateTextAppearance="@style/TextAppearance.AppCompat.Body1" -->
-
-    <FrameLayout android:id="@+id/main_layout"
+    <FrameLayout
+        android:id="@+id/content_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="?attr/actionBarSize"/>
+<!--        android:layout_above="@+id/bottomNavigationView"/>-->
+
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottomNavigationView"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_gravity="bottom"-->
+<!--        android:layout_marginStart="0dp"-->
+<!--        android:layout_marginEnd="0dp"-->
+<!--        app:itemBackground="@color/mainColor"-->
+<!--        app:itemIconTint="@color/White"-->
+<!--        app:labelVisibilityMode="unlabeled"-->
+<!--        app:menu="@menu/bottom_navigation"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+
+<!--    </com.google.android.material.bottomnavigation.BottomNavigationView>-->
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_gravity="bottom"
+        android:background="@color/mainColor"
+        app:menu="@menu/bottom_navigation"
+        app:labelVisibilityMode="unlabeled"
         app:itemBackground="@color/mainColor"
         app:itemIconTint="@color/White"
-        app:labelVisibilityMode="unlabeled"
-        app:menu="@menu/bottom_navigation"
+        app:itemTextColor="@color/White"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+        android:layout_height="wrap_content"/>
 
 
-</RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

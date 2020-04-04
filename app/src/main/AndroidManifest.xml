@@ -24,8 +24,8 @@
         <activity android:name=".JoinActivity" />
 
         <activity android:name=".WriteDairy" />
-
-        <activity android:name=".ChattingActivity" />
+        
+        <activity android:name=".ChattingFragment" />
     </application>
 
 </manifest>
