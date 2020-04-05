@@ -6,40 +6,52 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-    BottomNavigationView bottomNavigationView;
-    CalendarFragment calenderFragment;
-    ChattingFragment chattingFragment;
+
+    private FragmentManager fragmentManager = getSupportFragmentManager();
+    private BottomNavigationView bottomNavigationView;
+    private CalendarFragment calenderFragment;
+    private ChattingFragment chattingFragment;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BottomNavigationView navigation = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
-        calenderFragment = new CalendarFragment();
+        fragment();
+    }
+
+    private void fragment() {
+        calenderFragment = new CalendarFragment();//(CalendarFragment) getSupportFragmentManager().findFragmentById(R.id.content_main);
         chattingFragment = new ChattingFragment();
 
+        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.content_main, calenderFragment).commitAllowingStateLoss();
 //        getSupportFragmentManager().beginTransaction().replace(R.id.content_main, calenderFragment).commitAllowingStateLoss();
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+//        getSupportFragmentManager().beginTransaction().replace(R.id.content_main, calenderFragment).commit();
 
 
 //        Log.i("tag", "information message : main");
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Log.i("tag", "information message");
             switch (item.getItemId()) {
                 case R.id.action_calendar:
                     Log.i("tag", "information message : calendar");
-                    getSupportFragmentManager().beginTransaction().replace(R.id.content_main, calenderFragment).commit();/*프래그먼트 매니저가 프래그먼트를 담당한다!*/
+                    getSupportFragmentManager().beginTransaction().replace(R.id.content_main, calenderFragment).commit();
                     break;
                 case R.id.action_search:
                     Log.i("tag", "information message : search");

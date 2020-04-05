@@ -1,16 +1,12 @@
 package kr.hs.emirim.s2018s37.ru_ok;
 
-import android.content.Intent;
-import android.graphics.Paint;
+
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.Debug;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.util.regex.Pattern;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,8 +15,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.File;
+import java.util.regex.Pattern;
 
 import kr.hs.emirim.s2018s37.ru_ok.UserModel.UserModel;
 
@@ -31,6 +32,11 @@ public class JoinActivity extends AppCompatActivity {
 
     // 파이어베이스 인증 객체 생성
     private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
+    private FirebaseStorage firebaseStorage;
+
+    private Uri imageUri;
+    private String pathUri;
 
     // 이메일과 비밀번호
     private EditText editTextName;
@@ -50,6 +56,8 @@ public class JoinActivity extends AppCompatActivity {
 
         // 파이어베이스 인증 객체 선언
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseStorage = FirebaseStorage.getInstance();
 
         editTextName = findViewById(R.id.name_EditText);
         editTextEmail = findViewById(R.id.email_EditText);
@@ -85,15 +93,38 @@ public class JoinActivity extends AppCompatActivity {
 
                         if (task.isSuccessful()) {
                             // 회원가입 성공
-                            UserModel userModel = new UserModel();
-                            userModel.userName = name;
+//                            UserModel userModel = new UserModel();
+//                            userModel.userName = name;
+//
+//                            String uid = task.getResult().getUser().getUid();
+//                            FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel);
+                            final String uid = task.getResult().getUser().getUid();
+                            final Uri file = Uri.fromFile(new File("drawable/profile.png")); // path
 
-                            String uid = task.getResult().getUser().getUid();
-                            FirebaseDatabase.getInstance().getReference().child("users").child(uid).setValue(userModel);
+                            // 스토리지에 방생성 후 선택한 이미지 넣음
+                            StorageReference storageReference = firebaseStorage.getReference()
+                                    .child("usersProfileImages").child("uid/"+file.getLastPathSegment());
+                            storageReference.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                    final Task<Uri> imageUrl = task.getResult().getStorage().getDownloadUrl();
+                                    while (!imageUrl.isComplete()) ;
 
+                                    UserModel userModel = new UserModel();
+
+                                    userModel.userName = name;
+                                    userModel.uid = uid;
+                                    userModel.profileImageUrl = imageUrl.getResult().toString();
+
+                                    // database에 저장
+                                    firebaseDatabase.getReference().child("users").child(uid)
+                                            .setValue(userModel);
+                                }
+
+                            });
 
                             Toast.makeText(JoinActivity.this, "회원가입 완료", Toast.LENGTH_SHORT).show();
-                            finish();
+                            //finish();
                         } else {
                             // 회원가입 실패
                             Toast.makeText(JoinActivity.this, "회원가입 실패", Toast.LENGTH_SHORT).show();

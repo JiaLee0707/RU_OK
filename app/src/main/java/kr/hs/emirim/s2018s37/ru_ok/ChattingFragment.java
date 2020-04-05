@@ -32,7 +32,7 @@ public class ChattingFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //프래그먼트 메인을 인플레이트해주고 컨테이너에 붙여달라는 뜻임
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_calendar, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_chatting, container, false);
 
         return rootView;
     }
